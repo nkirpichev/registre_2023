@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TacheRepository::class)]
 class Tache
@@ -18,6 +19,7 @@ class Tache
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+  
     #[Groups('tache')]
     private ?string $description = null;
 
@@ -29,7 +31,8 @@ class Tache
     #[Groups('tache')]
     private ?\DateTimeInterface $dateAchevement = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true)] 
+    #[Assert\Range(['min' => 0])]
     private ?int $nombreHeure = null;
 
     #[ORM\Column(length: 255, nullable: true)]

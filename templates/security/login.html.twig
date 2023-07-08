@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+{#<form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -33,11 +33,36 @@
                 <input type="checkbox" name="_remember_me"> Remember me
             </label>
         </div>
-    #}
+    }
     <br>
 
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
     </button>
-</form>
+</form> #}
+
+
+<main class="form-signin w-25 m-auto">
+  <form method="post">
+
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+        <label for="inputEmail">Email address</label>
+    </div>
+    <div class="form-floating">
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+      <label for="inputPassword">Password</label>
+    </div>
+   
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+<br>
+    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+
+  </form>
+</main>
 {% endblock %}

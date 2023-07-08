@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\FactureRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FactureRepository::class)]
 class Facture
@@ -18,6 +19,7 @@ class Facture
     private ?\DateTimeInterface $dateFacture = null;
 
     #[ORM\Column]
+    #[Assert\Range(['min' => 0])]
     private ?int $total = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]

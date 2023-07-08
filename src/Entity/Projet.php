@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet
@@ -25,6 +26,7 @@ class Projet
     private ?\DateTimeInterface $dateProjet = null;
 
     #[ORM\Column]
+    #[Assert\Range(['min' => 0, 'max'=>1000])]
     private ?int $tauxHeure = null;
 
     #[ORM\ManyToOne(inversedBy: 'projets')]
