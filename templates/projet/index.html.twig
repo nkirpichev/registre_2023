@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet index{% endblock %}
+
+{% block body %}
+    <h1>Liste des projets {{statut is not defined?"":statut}}</h1>
+
+    <table class="table mx-3 fs-6">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Date projet</th>
+                <th>Taux heure, $</th>
+                <th>Total, $</th>
+                <th>Entreprise</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for projet in projets %}
+            <tr>
+                <td>{{ projet.id }}</td>
+                <td><a href="{{ path('app_projet_show', {'id': projet.id}) }}">{{ projet.nom }}</a></td>
+                <td>{{ projet.dateProjet ? projet.dateProjet|date('d-m-Y') : '' }}</td>
+                <td class="text-center">{{ projet.tauxHeure }}</td>
+                <td class="text-center">{{ projet.getTotal }}</td>
+                <td><a href="{{ path('app_entreprise_detail', {'id': projet.entreprise.id}) }}">{{ projet.entreprise }}</a></td>
+                <td>
+                    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class='btn btn-primary' href="{{ path('app_projet_new') }}">Ajouter projet</a>
+{% endblock %}

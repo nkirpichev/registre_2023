@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Facture{% endblock %}
+
+{% block body %}
+    <h1>Facture {{ facture }}</h1>
+    <div class="d-flex flex-row px-2">
+        <a class='mx-2' href="{{ path('app_facture_edit', {'id': facture.id}) }}">modifier</a>
+        <a class='mx-1' href="{{ path('app_facture_index') }}">back to list</a>
+    </div>
+    <table class="table mx-3 ">
+        <tbody>
+            <tr>
+                <th class="w-25">Id</th>
+                <td>{{ facture.id }}</td>
+            </tr>
+            <tr>
+                <th>Date facture</th>
+                <td>{{ facture.dateFacture ? facture.dateFacture|date('d-m-Y') : '' }}</td>
+            </tr>
+             <tr>
+                <th>Entreprise</th>
+                <td><a href="{{ path('app_entreprise_detail', {'id': facture.projet.entreprise.id}) }}">{{ facture.projet.entreprise}}</a></td>
+            </tr>
+             <tr>
+                <th>Projet</th>
+                <td><a href="{{ path('app_projet_show', {'id': facture.projet.id}) }}">{{ facture.projet }}</a></td>
+            </tr>
+            <tr>
+                <th>Total, $</th>
+                <td>{{ facture.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    {{ include('facture/_delete_form.html.twig') }}
+{% endblock %}

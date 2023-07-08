@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personne{% endblock %}
+
+{% block body %}
+    <h1>Personne</h1>
+    <div class="d-flex flex-row px-2">
+        <a class='mx-2' href="{{ path('app_personne_index') }}">back to list</a>
+        <a class='mx-2' href="{{ path('app_personne_edit', {'id': personne.id}) }}">modifier</a>
+    </div>
+
+    <table class="table mx-3">
+        <tbody>
+            <tr>
+                <th class="w-25">Id</th>
+                <td>{{ personne.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ personne.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ personne.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Prestataire</th>
+                <td>{{ personne.isPrestataire ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+  
+    {% if personne.isPrestataire %}
+    <div class = "pt-4 px-4">
+    <h3>Liste des taches</h3>
+
+        <ul>  
+        {% for tache in personne.tachesPrestataire %}
+
+            <li><a href="{{ path('app_tache_show', {'id': tache.id}) }}">{{ tache }}</a> - {{tache.laststatut}}</li>
+
+        {% else %}
+             <li colspan="3">no records found</li>
+        {% endfor %}
+        </ul>
+         
+    </div>
+
+        
+    {% endif %}
+
+
+
+
+    {{ include('personne/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personne index{% endblock %}
+
+{% block body %}
+    <h1>Liste des personnes</h1>
+
+    <table class="table mx-3 fs-6">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Prestataire</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personne in personnes %}
+            <tr>
+                <td>{{ personne.id }}</td>
+                <td>{{ personne.nom }}</td>
+                <td>{{ personne.prenom }}</td>
+                <td>{{ personne.isPrestataire ? 'X' : '' }}</td>
+                <td>
+                    <a href="{{ path('app_personne_show', {'id': personne.id}) }}">ouvrir</a>
+                    <a href="{{ path('app_personne_edit', {'id': personne.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class='btn btn-primary' href="{{ path('app_personne_new') }}">Ajouter personne</a>
+{% endblock %}

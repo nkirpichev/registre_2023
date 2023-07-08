@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TacheStatut index{% endblock %}
+
+{% block body %}
+    <h1>Liste de status de taches</h1>
+
+    <table class="table mx-3 fs-6">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date changement</th>
+                <th>Tache</th>
+                <th>Statut</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tache_statut in tache_statuts %}
+            <tr>
+                <td>{{ tache_statut.id }}</td>
+                <td>{{ tache_statut.dateChangement ? tache_statut.dateChangement|date('d-m-Y') : '' }}</td>
+                 <td><a href="{{ path('app_tache_show', {'id': tache_statut.tache.id}) }}">{{ tache_statut.tache }}</a></td>
+                <td>{{ tache_statut.statut }}</td>
+                <td>
+                    <a href="{{ path('app_tache_statut_show', {'id': tache_statut.id}) }}">ouvrir</a>
+                    <a href="{{ path('app_tache_statut_edit', {'id': tache_statut.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tache_statut_new', {'tache_id': 0}) }}">Ajouter tache</a>
+{% endblock %}

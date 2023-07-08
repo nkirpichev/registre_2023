@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle facture{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une nouvelle facture</h1>
+    <a href="{{ path('app_facture_index') }}">back to list</a>
+    
+    {{ include('facture/_form.html.twig') }}
+
+{% endblock %}

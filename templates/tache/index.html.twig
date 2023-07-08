@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tache index{% endblock %}
+
+{% block body %}
+    <h1>Liste des taches {{statut is not defined?"":statut}}</h1>
+
+    <table class="table mx-3 fs-6">
+        <thead>
+            <tr class="text-center">
+                <th>Id</th>
+                <th>Projet</th>
+                <th>Description</th>
+                <th>Date debut</th>
+                <th>Date achevement</th>
+                <th>Nombre heure</th>
+                <th>Prestataire</th>
+                <th>Statut</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tache in taches %}
+            <tr>
+                <td>{{ tache.id }}</td>
+                <td><a href="{{ path('app_projet_show', {'id': tache.projet.id}) }}">{{ tache.projet }}</a></td>
+                <td><a href="{{ path('app_tache_show', {'id': tache.id}) }}">{{ tache.description }}</a></td>
+                <td>{{ tache.dateDebut ? tache.dateDebut|date('d-m-Y') : '' }}</td>
+                <td>{{ tache.dateAchevement ? tache.dateAchevement|date('d-m-Y') : '' }}</td>
+                <td>{{ tache.nombreHeure }}</td>
+                <td><a href="{{ path('app_personne_show', {'id': tache.prestataire ? tache.prestataire.id: 0  }) }}">{{ tache.prestataire }}</a></td>
+                <td>{{ tache.laststatut }}</td>
+                <td>
+                    <a href="{{ path('app_tache_edit', {'id': tache.id}) }}">modifier</a>
+                    <a href="{{ path('app_tache_statut_new', {'tache_id': tache.id}) }}">statut</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class='btn btn-primary' href="{{ path('app_tache_new', {'projet_id': 0}) }}">Ajouter tache</a>
+{% endblock %}

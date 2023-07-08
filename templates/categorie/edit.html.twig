@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier catégorie{% endblock %}
+
+{% block body %}
+    <h1>Modifier catégorie</h1>
+    <a href="{{ path('app_categorie_index') }}">back to list</a>
+    {{ include('categorie/_form.html.twig', {'button_label': 'Valider'}) }}
+
+
+
+    {{ include('categorie/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet{% endblock %}
+
+{% block body %}
+    <h1>Détail du projet "{{ projet.nom }}"</h1> 
+    <div class="d-flex flex-row px-2">
+        <a class='mx-2' href="{{ path('app_projet_edit', {'id': projet.id}) }}">modifier</a>
+        <a class='mx-1' href="{{ path('app_projet_index') }}">back to list</a>
+    </div>
+    <table class="table mx-3">
+        <tbody>
+            <tr>
+                <th class="w-25">Id</th>
+                <td>{{ projet.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ projet.nom }}</td>
+            </tr>
+            <tr>
+                <th>Date projet</th>
+                <td>{{ projet.dateProjet ? projet.dateProjet|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Taux heure, $</th>
+                <td>{{ projet.tauxHeure }}</td>
+            </tr>
+            <tr>
+                <th>Total, $</th>
+                <td>{{projet.getTotal}}</td>
+            </tr>
+             <tr>
+                <th>Entreprise</th>
+                <td><a href="{{ path('app_entreprise_detail', {'id': projet.entreprise.id}) }}">{{ projet.entreprise }}</a></td>
+            </tr>
+            <tr>
+                <th>Facture</th>
+                {% if facture %}
+                    <td><a href="{{ path('app_facture_show', {'id': facture.id}) }}">{{ facture }}</a></td>
+                {% else %}
+                    <td><a class="btn btn-secondary" href="{{ path('app_facture_new_from_projet', {'projet_id': projet.id}) }}">Ajouter facture</a></td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+
+    <div class = "pt-4 px-4">
+    <h3>Liste des taches</h3>
+
+        <ul>  
+        {% for tache in projet.taches %}
+
+            <li><a href="{{ path('app_tache_show', {'id': tache.id}) }}">{{ tache }} </a>- {{ tache.laststatut }}</li>
+
+        {% else %}
+             <li colspan="3">no records found</li>
+        {% endfor %}
+        </ul>
+         <a class='btn btn-primary' href="{{ path('app_tache_new', {'projet_id': projet.id}) }}">Ajouter tache</a>
+    </div>
+
+    <br><br>
+    {{ include('projet/_delete_form.html.twig') }}
+
+{% endblock %}

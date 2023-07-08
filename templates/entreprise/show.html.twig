@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statut{% endblock %}
+
+{% block body %}
+    <h1>Détail de l'entreprise {{ entreprise.nom }}</h1>
+    <div class="d-flex flex-row px-2">
+        <a class='mx-2' href="{{ path('app_entreprise_edit', {'id': entreprise.id}) }}">modifier</a>
+        <a class='mx-1' href="{{ path('app_entreprise') }}">back to list</a>
+    </div>
+    <table class="table mx-3">
+        <tbody>
+            <tr>
+                <th class="w-25">Id</th>
+                <td>{{ entreprise.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entreprise.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+   
+   <br> 
+    <div class = "pt-4 px-4">
+    <h3>Liste des projets</h3>
+
+        <ul>  
+        {% for projet in projets %}
+
+            <li><a href="{{ path('app_projet_show', {'id': projet.id}) }}">{{ projet }}</a></li>
+
+        {% else %}
+             <li colspan="3">no records found</li>
+        {% endfor %}
+        </ul>
+        <a class='btn btn-primary' href="{{ path('app_projet_new', {'entreprise_id': entreprise.id}) }}">Ajouter projet</a>
+    </div>
+    <br>
+
+    <div class = "pb-4 px-4">
+    <h3>Liste des employés</h3>
+
+        <ul>  
+        {% for employe in employes %}
+
+            <li><a href="{{ path('app_personne_show', {'id': employe.id}) }}">{{ employe }}</a></li>
+
+        {% else %}
+             <li colspan="3">no records found</li>
+        {% endfor %}
+        </ul>
+    </div>
+
+
+    {{ include('entreprise/_delete_form.html.twig') }}
+{% endblock %}

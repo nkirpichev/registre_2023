@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle entreprise{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une nouvelle entreprise</h1>
+<div class = "my-3">
+{{ form_start(form) }}
+ {{ form_row(form.nom) }}
+   <div class = "d-grid gap-2 d-sm-flex my-2"> {{ form_widget(form.valider) }} {{ form_widget(form.annuler) }} </div>
+{{ form_end(form) }}
+</div>
+
+{% endblock %}

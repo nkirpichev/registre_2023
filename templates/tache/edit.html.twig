@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier tache{% endblock %}
+
+{% block body %}
+    <h1>Modifier tache</h1>
+    <a href="{{ path('app_tache_index') }}">back to list</a>
+    {{ include('tache/_form.html.twig', {'button_label': 'Valider'}) }}
+
+
+    <br>
+    {{ include('tache/_delete_form.html.twig') }}
+{% endblock %}

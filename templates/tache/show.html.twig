@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tache{% endblock %}
+
+{% block body %}
+    <h1>Détail de la tache - {{tache.description }}</h1>
+      <div class="d-flex flex-row px-2">
+        <a class='mx-2' href="{{ path('app_tache_edit', {'id': tache.id}) }}">modifier</a>
+        <a class='mx-1' href="{{ path('app_tache_statut_new', {'tache_id': tache.id}) }}">changer statut</a>
+        <a class='mx-2' href="{{ path('app_tache_index') }}">back to list</a>
+    </div>
+
+    <table class="table mx-3 ">
+        <tbody>
+            <tr>
+                <th class="w-25">Id</th>
+                <td>{{ tache.id }}</td>
+            </tr>
+            <tr>
+                <th>Projet</th>
+                <td><a href="{{ path('app_projet_show', {'id': tache.projet.id}) }}">{{ tache.projet }}</a></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ tache.description }}</td>
+            </tr>
+            <tr>
+                <th>Date debut</th>
+                <td>{{ tache.dateDebut ? tache.dateDebut|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date achevement</th>
+                <td>{{ tache.dateAchevement ? tache.dateAchevement|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nombre heure</th>
+                <td>{{ tache.nombreHeure }}</td>
+            </tr>
+           <tr>
+                <th>Statut</th>
+                <td><a href="{{ path('app_tache_statut_show', {'id':  tache.laststatut ? tache.laststatut.id :0  }) }}">{{ tache.laststatut }}</a></td>
+            </tr>
+           <tr>
+                <th>Prestataire</th>
+                <td><a href="{{ path('app_personne_show', {'id': tache.prestataire ? tache.prestataire.id: 0  }) }}">{{ tache.prestataire }}</a></td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ tache.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class = "pt-4 px-4">
+    <h3>Historique du statut</h3>
+
+        <ul>  
+        {% for status in tache.tacheStatuts %}
+
+            <li>{{ status.showStatusDate}}</li>
+
+        {% else %}
+             <li colspan="3">no records found</li>
+        {% endfor %}
+        </ul>
+         
+    </div>
+
+
+
+    {{ include('tache/_delete_form.html.twig') }}
+{% endblock %}

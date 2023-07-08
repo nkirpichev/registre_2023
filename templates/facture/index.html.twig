@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Facture index{% endblock %}
+
+{% block body %}
+    <h1>Liste des factures</h1>
+
+    <table class="table mx-3 fs-6">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date facture</th>
+                <th>Entreprise</th>
+                <th>Projet</th>
+                <th>Total, $</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for facture in factures %}
+            <tr>
+                <td>{{ facture.id }}</td>
+                <td>{{ facture.dateFacture ? facture.dateFacture|date('d-m-Y') : '' }}</td>
+                <td><a href="{{ path('app_entreprise_detail', {'id': facture.projet.entreprise.id}) }}">{{ facture.projet.entreprise }}</a></td>
+                <td><a href="{{ path('app_projet_show', {'id': facture.projet.id}) }}">{{ facture.projet }}</a></td>
+                <td class="text-center pe-4">{{ facture.total }}</td>
+                <td>
+                    <a href="{{ path('app_facture_show', {'id': facture.id}) }}">ouvrir</a>
+                    <a href="{{ path('app_facture_edit', {'id': facture.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class='btn btn-primary' href="{{ path('app_facture_new') }}">Ajouter facture</a>
+{% endblock %}
