@@ -17,6 +17,7 @@ class ProjetType extends AbstractType
     {
         $builder
             ->add('nom')
+            ->add('termine')
             ->add('dateProjet',DateType::class,array( 'widget'=>'single_text','attr'=>['class'=>'w-25']))
             ->add('tauxHeure',IntegerType::class,array("label" => "Taux heure, $",'attr'=>['class'=>'w-25']))
             ->add('entreprise', EntityType::class, ['class'=>Entreprise::class, 'expanded'=>false,'attr'=>['class'=>'w-25']])

@@ -35,7 +35,7 @@ security:
          - { path: ^/login, roles:  }
          - { path: ^/main, roles:  }
          - { path: ^/logout, roles:  }
-         - { path: ^/tache/api, roles:  }
+         - { path: ^/tache/api, roles: }
          - { path: ^/, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 

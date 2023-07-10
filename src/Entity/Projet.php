@@ -35,6 +35,9 @@ class Projet
     #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Tache::class)]
     private Collection $taches;
 
+    #[ORM\Column]
+    private ?bool $termine = null;
+
     public function __construct()
     {
         $this->taches = new ArrayCollection();
@@ -127,6 +130,18 @@ class Projet
                 $tach->setProjet(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isTermine(): ?bool
+    {
+        return $this->termine;
+    }
+
+    public function setTermine(bool $termine): self
+    {
+        $this->termine = $termine;
 
         return $this;
     }

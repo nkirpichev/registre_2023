@@ -23,6 +23,10 @@
                 <td>{{ projet.dateProjet ? projet.dateProjet|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
+                <th>Terminé</th>
+                <td>{{ projet.termine ? 'Oui' : 'Non' }}</td>
+            </tr>
+            <tr>
                 <th>Taux heure, $</th>
                 <td>{{ projet.tauxHeure }}</td>
             </tr>

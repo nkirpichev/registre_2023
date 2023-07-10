@@ -13,6 +13,7 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
     </head>
     <body>
     <div class="container p-4">
@@ -20,13 +21,13 @@
     <div class="container">
         <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_main') }}">Accueil</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_entreprise') }}">Entreprises</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_projet_index') }}">Projets</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_tache_index') }}">Taches</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_facture_index') }}">Factures</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_personne_index') }}">Personnes</a></li>  
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_categorie_index') }}">Catégories</a></li>                         
+            <li class="nav-item"><a id='main' class="nav-link" href="{{ path('app_main') }}">Accueil</a></li>
+            <li class="nav-item"><a id='entreprise'  class="nav-link" href="{{ path('app_entreprise') }}">Entreprises</a></li>
+            <li class="nav-item"><a id='projet' class="nav-link" href="{{ path('app_projet_index') }}">Projets</a></li>
+            <li class="nav-item"><a id='tache' class="nav-link" href="{{ path('app_tache_index') }}">Taches</a></li>
+            <li class="nav-item"><a id='facture' class="nav-link" href="{{ path('app_facture_index') }}">Factures</a></li>
+            <li class="nav-item"><a id='personne' class="nav-link" href="{{ path('app_personne_index') }}">Personnes</a></li>  
+            <li class="nav-item"><a id='categorie' class="nav-link" href="{{ path('app_categorie_index') }}">Catégories</a></li>                         
         </ul>
         
 
@@ -40,7 +41,9 @@
       </div>
       </header>
     </div>
-
+    <script> 
+        document.getElementById(document.location.pathname.split('/')[1]).style.color = "gray";
+    </script>
        {# <a href="{{ path('app_main') }}">accueil</a>
         <a href="{{ path('app_entreprise') }}">entreprise</a>
         <a href="{{ path('app_projet_index') }}">projet</a>
@@ -60,4 +63,6 @@
         </div>
         </div>
     </body>
+
+
 </html>

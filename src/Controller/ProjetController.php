@@ -51,10 +51,21 @@ class ProjetController extends AbstractController
     public function indexStatus(ProjetRepository $projetRepository): Response
     {
         $taches = array();
-        $projets = $projetRepository->findProjetSansFacture();
+        $projets = $projetRepository->findBy(['termine'=>false]);//findProjetSansFacture();
 
         return $this->render('projet/index.html.twig', [
             'projets' => $projets, 'statut'=>'en cours'
+        ]);
+    }  
+
+    #[Route('/afacturer', name: 'app_projet_afacturer_index', methods: ['GET', 'POST'])]
+    public function indexAFacturer(ProjetRepository $projetRepository): Response
+    {
+        $taches = array();
+        $projets = $projetRepository->findProjetSansFacture();
+
+        return $this->render('projet/index.html.twig', [
+            'projets' => $projets, 'statut'=>'à facturer'
         ]);
     }  
 
